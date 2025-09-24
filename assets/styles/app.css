@@ -1,3 +1,310 @@
-body {
-    background-color: skyblue;
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+/* Layout general */
+.dashboard {
+  display: flex;
+  height: 100vh;
+  background-color: #f5f7fa;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #1a73e8;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebar nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.sidebar nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Main */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  background: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  color: #34495e;
+}
+
+.user-info img {
+  border-radius: 50%;
+}
+
+/* Content */
+.content {
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.card {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.card h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #1a202c;
+}
+
+.card ul {
+  list-style: disc;
+  padding-left: 20px;
+  line-height: 1.7;
+}
+
+.card li {
+  margin-bottom: 12px;
+  color: #34495e;
+  font-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+  .header {
+    justify-content: center;
+  }
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  margin: 60px auto 40px auto;
+  max-width: 800px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #4a5568;
+  margin-bottom: 30px;
+}
+
+.cta-button {
+  background: #1a73e8;
+  color: white;
+  padding: 14px 30px;
+  font-size: 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.cta-button:hover {
+  background: #1669c1;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Features Section */
+.features {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 10px;
+  padding: 25px;
+  width: 260px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.feature-card h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #2c3e50;
+}
+
+.feature-card p {
+  font-size: 15px;
+  color: #4a5568;
+}
+
+/* Animations */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+.fade-in.delay-1 {
+  animation-delay: 0.5s;
+}
+.fade-in.delay-2 {
+  animation-delay: 1s;
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.8s forwards;
+}
+
+.slide-up.delay-1 {
+  animation-delay: 0.3s;
+}
+.slide-up.delay-2 {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Página de profiles */
+.profiles-page {
+  padding: 20px 30px;
+}
+
+.profiles-page h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 10px;
+}
+
+.profiles-page .subtitle {
+  font-size: 16px;
+  color: #4a5568;
+  margin-bottom: 30px;
+}
+
+/* Tarjetas por perfil */
+.profile-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 25px;
+  margin-bottom: 40px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.12);
+}
+
+.profile-card h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+/* Tablas */
+.skills-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.skills-table th {
+  text-align: left;
+  background: #f1f5f9;
+  padding: 12px 15px;
+  color: #1e293b;
+  font-weight: 600;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.skills-table td {
+  padding: 10px 15px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #34495e;
+}
+
+/* Colores según nivel */
+.skills-table td.lower {
+  color: #e53e3e;
+  font-weight: 600;
+}
+
+.skills-table td.higher {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.skills-table tr:hover {
+  background: #f9fafb;
 }
