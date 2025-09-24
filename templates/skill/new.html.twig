@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="card">
+    <h1>Crear nueva Skill</h1>
+
+    {{ form_start(form) }}
+      {{ form_widget(form) }}
+      <button class="cta-button">Guardar</button>
+    {{ form_end(form) }}
+  </div>
+{% endblock %}

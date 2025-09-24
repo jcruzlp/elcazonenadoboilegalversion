@@ -17,7 +17,7 @@
         <div class="dashboard">
             <!-- Sidebar -->
             <aside class="sidebar">
-                <h2>Skill Matrix</h2>
+                <h2><a href="/" class="sidebar-title">Skill Scope</a></h2>
                 <nav>
                     <a href="#">Training</a>
                     <a href="#">Projects</a>
@@ -30,12 +30,23 @@
             <div class="main">
                 <!-- Header -->
                 <header class="header">
-                    <h1>Dashboard</h1>
-                    <div class="user-info">
-                        <span>Admin</span>
-                        <img src="https://via.placeholder.com/40" alt="User Avatar">
+                    <div class="header-left">
+                        <h1>Dashboard</h1>
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-info">
+                            <span class="username">Admin</span>
+                            <img src="{{ asset('images/default-avatar.png') }}" alt="User Avatar" class="avatar">
+                        </div>
+                        <ul class="dropdown">
+                            <li><a href="#">Perfil</a></li>
+                            <li><a href="#">Configuración</a></li>
+                            <li><a href="#">Cerrar sesión</a></li>
+                        </ul>
                     </div>
                 </header>
+
+
 
                 <!-- Content -->
                 <section class="content">

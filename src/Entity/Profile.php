@@ -2,34 +2,53 @@
 
 namespace App\Entity;
 
-use App\Repository\ProfileRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProfileRepository::class)]
+#[ORM\Entity]
 class Profile
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
 
-    public function getId(): ?int
+    #[ORM\OneToMany(mappedBy: 'profile', targetEntity: Skill::class, cascade: ['persist', 'remove'])]
+    private Collection $skills;
+
+    public function __construct()
     {
-        return $this->id;
+        $this->skills = new ArrayCollection();
     }
 
-    public function getName(): ?string
+    public function getId(): ?int { return $this->id; }
+
+    public function getName(): string { return $this->name; }
+    public function setName(string $name): self { $this->name = $name; return $this; }
+
+    /** @return Collection<int, Skill> */
+    public function getSkills(): Collection { return $this->skills; }
+
+    public function addSkill(Skill $skill): self
     {
-        return $this->name;
+        if (!$this->skills->contains($skill)) {
+            $this->skills[] = $skill;
+            $skill->setProfile($this);
+        }
+        return $this;
     }
 
-    public function setName(string $name): static
+    public function removeSkill(Skill $skill): self
     {
-        $this->name = $name;
-
+        if ($this->skills->removeElement($skill)) {
+            if ($skill->getProfile() === $this) {
+                $skill->setProfile(null);
+            }
+        }
         return $this;
     }
 }

@@ -3,57 +3,28 @@
 {% block title %}Profiles{% endblock %}
 
 {% block body %}
-  <div class="profiles-page">
-    <h1>Profiles</h1>
-    <p class="subtitle">Estado de conocimientos por perfil</p>
+<div class="profiles-page">
+  <h1>Profiles</h1>
+  <p class="subtitle">Estado de conocimientos por perfil</p>
 
-    {% for profile in profiles %}
-        <h2><a href="profile.html">{{ profile.name }}</a></h2>
-        <table>
-            <tr>
-                <th>Skill</th>
-                <th>Junior</th>
-                <th>Senior</th>
-                <th>Expert</th>
-            </tr>
-            <tr>
-                <td>Java (Spring, Hibernate)</td>
-                <td class="lower">95%</td>
-                <td>100%</td>
-                <td class="higher">105%</td>
-            </tr>
-            <tr>
-                <td>RESTful APIs & Microservices</td>
-                <td>100%</td>
-                <td class="higher">110%</td>
-                <td>100%</td>
-            </tr>
-            <tr>
-                <td>SQL / NoSQL Databases</td>
-                <td>100%</td>
-                <td>100%</td>
-                <td class="higher">108%</td>
-            </tr>
-            <tr>
-                <td>Version Control (Git)</td>
-                <td class="lower">90%</td>
-                <td>100%</td>
-                <td>100%</td>
-            </tr>
-            <tr>
-                <td>Unit Testing & CI/CD</td>
-                <td>100%</td>
-                <td>100%</td>
-                <td class="higher">102%</td>
-            </tr>
-        </table>
-    {% endfor %}
+  <div class="actions">
+    <a href="{{ path('app_profile_new') }}" class="cta-button">➕ Nuevo Perfil</a>
+    <a href="{{ path('app_skill_new') }}" class="cta-button">➕ Nueva Skill</a>
+  </div>
 
-
-
-    <!-- Java Developer -->
+  {% for profile in profiles %}
     <div class="profile-card">
-      <h2>Java Developer</h2>
+      <h2>{{ profile.name }}</h2>
+
+      <div class="profile-actions">
+        <a href="{{ path('app_profile_edit', {id: profile.id}) }}" class="btn-edit">✏️ Editar Perfil</a>
+        <form method="post" action="{{ path('app_profile_delete', {id: profile.id}) }}" class="inline-form"
+              onsubmit="return confirm('¿Seguro que quieres eliminar este perfil?');">
+          <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ profile.id) }}">
+          <button class="btn-delete">🗑 Eliminar Perfil</button>
+        </form>
+      </div>
+
       <table class="skills-table">
         <thead>
           <tr>
@@ -61,44 +32,33 @@
             <th>Junior</th>
             <th>Senior</th>
             <th>Expert</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Java (Spring, Hibernate)</td>
-            <td class="lower">95%</td>
-            <td>100%</td>
-            <td class="higher">105%</td>
-          </tr>
-          <tr>
-            <td>RESTful APIs & Microservices</td>
-            <td>100%</td>
-            <td class="higher">110%</td>
-            <td>100%</td>
-          </tr>
-          <tr>
-            <td>SQL / NoSQL Databases</td>
-            <td>100%</td>
-            <td>100%</td>
-            <td class="higher">108%</td>
-          </tr>
-          <tr>
-            <td>Version Control (Git)</td>
-            <td class="lower">90%</td>
-            <td>100%</td>
-            <td>100%</td>
-          </tr>
-          <tr>
-            <td>Unit Testing & CI/CD</td>
-            <td>100%</td>
-            <td>100%</td>
-            <td class="higher">102%</td>
-          </tr>
+          {% for skill in profile.skills %}
+            <tr>
+              <td>{{ skill.name }}</td>
+              <td>{{ skill.junior }}%</td>
+              <td>{{ skill.senior }}%</td>
+              <td>{{ skill.expert }}%</td>
+              <td class="skill-actions">
+                <a href="{{ path('app_skill_edit', {id: skill.id}) }}" class="btn-edit">✏️ Editar</a>
+                <form method="post" action="{{ path('app_skill_delete', {id: skill.id}) }}" class="inline-form"
+                      onsubmit="return confirm('¿Seguro que quieres eliminar esta skill?');">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ skill.id) }}">
+                  <button class="btn-delete">🗑 Eliminar</button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr><td colspan="5">No hay skills para este perfil</td></tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
-
-    <!-- Aquí seguirían DevOps, Frontend, Cybersecurity, igual que Java Developer -->
-    <!-- Cada perfil envuelto en un .profile-card -->
-  </div>
+  {% else %}
+    <p>No hay perfiles cargados.</p>
+  {% endfor %}
+</div>
 {% endblock %}
