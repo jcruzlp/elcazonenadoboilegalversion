@@ -1,64 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SkillScope{% endblock %}
-
-{% block stylesheets %}
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 50px;
-            text-align: center;
-        }
-        h1 {
-            margin-bottom: 40px;
-        }
-        a {
-            display: inline-block;
-            margin: 15px;
-            padding: 15px 30px;
-            background-color: #2196f3;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 18px;
-            transition: background-color 0.3s;
-        }
-        a:hover {
-            background-color: #1976d2;
-        }
-        .info {
-            text-align:left;
-            width: 500px;
-            margin: auto;
-        }
-    </style>
-{% endblock %}
+{% block title %}Skill Scope - Dashboard{% endblock %}
 
 {% block body %}
+  <div class="hero">
+    <h1 class="fade-in">Welcome to Skill Scope</h1>
+    <p class="fade-in delay-1">
+      Una plataforma para evaluar y visualizar el estado de los conocimientos en tu empresa.
+    </p>
+    <a href="/profile" class="cta-button fade-in delay-2">Explorar Perfiles</a>
+  </div>
 
-    <a href="/profile">Training</a>
-    <a href="projects.html">Projects</a>
-    <a href="hr.html">Human Resources</a>
-    <a href="profiles_skills.html">Profiles</a>
-
-    <ul class="info">
-        <li>
-            Cada perfil define una serie de skills
-        </li>
-        <li>
-            El ideal para cada persona (el 100%) sería tener los skills en el nivel suyo (es decir, un dev junior tendría que tener todos los skills en nivel junior.) Si le falta nivel en alguno, el porcentaje estaría por debajo del 100% y si tiene de más, por encima. Esta suposición igual no se corresponde con lo que necesitas o igual es demasiado estricto, pero es una forma de evaluar el estado del personal.
-        </li>
-        <li>
-            El cálculo de valores se podría hacer asignando puntos a cada nivel (jr 1, sr 2, expert 3). Si sumamos todos los puntos “ideales”, podemos comparar con los que realmente tiene. Por ejemplo, si el perfil Java dev tiene 10 skills, los puntos deseables para un Jr serían 10. Si le faltan 2 skills, los puntos actuales serían 8, por lo que tendría un 80% global. Para los porcentajes de un skill en un grupo de gente sería lo mismo: si hay dos jr y un senior, la puntuación “ideal” sería de 4 (1+1+2) y si le falta a un jr, tendríamos un 3, es decir, un 75%
-        </li>
-        <li>
-            Los empleados van asociados a los projectos con un porcentaje.
-        </li>
-        <li>
-            Se definen un número de skills deseados por nivel.
-            Así se puede ver si hay carencia de skills ya sea por
-            falta de personal o porque están al 100%
-        </li>
-
-    </ul>
+  <div class="features">
+    <div class="feature-card slide-up">
+      <h2>📊 Estado Global</h2>
+      <p>Obtén una visión clara del nivel de skills por departamento, perfil o persona.</p>
+    </div>
+    <div class="feature-card slide-up delay-1">
+      <h2>⚡ Rápida Evaluación</h2>
+      <p>Evalúa en segundos si tu equipo cumple con las necesidades del proyecto.</p>
+    </div>
+    <div class="feature-card slide-up delay-2">
+      <h2>🎯 Plan de Mejora</h2>
+      <p>Identifica carencias de skills y planifica entrenamientos para potenciar al equipo.</p>
+    </div>
+  </div>
 {% endblock %}
