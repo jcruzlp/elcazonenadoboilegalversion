@@ -5,12 +5,12 @@
 {% block body %}
   <div class="profiles-page">
     <h1>Profiles</h1>
-    <p class="subtitle">Estado de conocimientos por perfil</p>
+    <p class="subtitle">Skill status by profile</p>
 
    {% for profile in profiles %}
     <!-- Java Developer -->
     <div class="profile-card">
-      <h2>Java Developer</h2>
+      <h2><a href="/profile/{{ profile.id }}">{{ profile.name }}</a></h2>
       <table class="skills-table">
         <thead>
           <tr>
