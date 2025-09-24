@@ -11,6 +11,50 @@
     <a href="index.html">Home</a>
     <h1>Profiles</h1>
 
+    {% for profile in profiles %}
+        <h2><a href="profile.html">{{ profile.name }}</a></h2>
+        <table>
+            <tr>
+                <th>Skill</th>
+                <th>Junior</th>
+                <th>Senior</th>
+                <th>Expert</th>
+            </tr>
+            <tr>
+                <td>Java (Spring, Hibernate)</td>
+                <td class="lower">95%</td>
+                <td>100%</td>
+                <td class="higher">105%</td>
+            </tr>
+            <tr>
+                <td>RESTful APIs & Microservices</td>
+                <td>100%</td>
+                <td class="higher">110%</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>SQL / NoSQL Databases</td>
+                <td>100%</td>
+                <td>100%</td>
+                <td class="higher">108%</td>
+            </tr>
+            <tr>
+                <td>Version Control (Git)</td>
+                <td class="lower">90%</td>
+                <td>100%</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>Unit Testing & CI/CD</td>
+                <td>100%</td>
+                <td>100%</td>
+                <td class="higher">102%</td>
+            </tr>
+        </table>
+    {% endfor %}
+
+
+
     <!-- Java Developer -->
     <h2><a href="profile.html">Java Developer</a></h2>
     <table>

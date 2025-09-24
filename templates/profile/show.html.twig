@@ -1,0 +1,229 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profiles{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block body %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <h1>Profile Selection</h1>
+    <a href="/">Home</a> >
+    <a href="/profile">Profiles</a>
+    <form>
+        <label for="profile">Profile:</label>
+        <select id="profile" name="profile">
+            <option>Java Developer</option>
+            <option>DevOps Engineer</option>
+            <option>Frontend Developer</option>
+            <option>Cybersecurity Analyst</option>
+        </select>
+
+        <label for="level">Level:</label>
+        <select id="level" name="level">
+            <option>All</option>
+                <option>Junior</option>
+                <option>Senior</option>
+                <option>Expert</option>
+        </select>
+    </form>
+
+    <!-- Radar Chart -->
+    <div id="chartContainer">
+        <canvas id="skillsRadar" width="400" height="400"></canvas>
+    </div>
+
+    <h2>Users</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Level</th>
+            <th>Java (Spring, Hibernate)</th>
+            <th>RESTful APIs & Microservices</th>
+            <th>SQL / NoSQL Databases</th>
+            <th>Version Control (Git)</th>
+            <th>Unit Testing & CI/CD</th>
+        </tr>
+        <tr>
+            <td>Ana Torres</td>
+            <td>Junior</td>
+            <td class="higher">+1</td>
+            <td></td>
+            <td></td>
+            <td class="lower">-1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Carlos Ruiz</td>
+            <td>Senior</td>
+            <td></td>
+            <td class="higher">+2</td>
+            <td></td>
+            <td></td>
+            <td class="lower">-1</td>
+        </tr>
+        <tr>
+            <td>Lucía Martín</td>
+            <td>Expert</td>
+            <td></td>
+            <td></td>
+            <td class="higher">+1</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>David López</td>
+            <td>Senior</td>
+            <td></td>
+            <td class="lower">-2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Sara Jiménez</td>
+            <td>Junior</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="higher">+1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Mario Fernández</td>
+            <td>Expert</td>
+            <td class="lower">-1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="higher">+2</td>
+        </tr>
+        <tr>
+            <td>Elena García</td>
+            <td>Senior</td>
+            <td></td>
+            <td></td>
+            <td class="higher">+1</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Juan Pérez</td>
+            <td>Junior</td>
+            <td></td>
+            <td class="higher">+1</td>
+            <td></td>
+            <td></td>
+            <td class="lower">-2</td>
+        </tr>
+        <tr>
+            <td>Paula Sánchez</td>
+            <td>Expert</td>
+            <td></td>
+            <td></td>
+            <td class="lower">-1</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Hugo Navarro</td>
+            <td>Senior</td>
+            <td class="higher">+1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="lower">-1</td>
+        </tr>
+    </table>
+
+    <h2>Training recomendation</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Course</th>
+        </tr>
+        <tr>
+            <td>Ana Torres</td>
+            <td>Mastering Git for Team Collaboration</td>
+        </tr>
+        <tr>
+            <td>Carlos Ruiz</td>
+            <td>Effective Unit Testing with JUnit & CI/CD Pipelines</td>
+        </tr>
+        <tr>
+            <td>David López</td>
+            <td>Building Robust RESTful APIs with Spring Boot</td>
+        </tr>
+        <tr>
+            <td>Mario Fernández</td>
+            <td>Advanced Java Best Practices with Spring & Hibernate</td>
+        </tr>
+        <tr>
+            <td>Juan Pérez</td>
+            <td>Improving Code Quality with Unit Testing Strategies</td>
+        </tr>
+        <tr>
+            <td>Paula Sánchez</td>
+            <td>Optimizing SQL & NoSQL Queries for Performance</td>
+        </tr>
+        <tr>
+            <td>Hugo Navarro</td>
+            <td>Continuous Integration & Automated Testing Essentials</td>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        const ctx = document.getElementById('skillsRadar').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    'Java (Spring, Hibernate)',
+                    'RESTful APIs & Microservices',
+                    'SQL / NoSQL Databases',
+                    'Version Control (Git)',
+                    'Unit Testing & CI/CD'
+                ],
+                datasets: [{
+                    label: 'Skill Levels',
+                    data: [102, 95, 100, 97, 105], // some >100 (green), some <100 (red)
+                    fill: true,
+                    backgroundColor: 'rgba(0, 128, 0, 0.2)',
+                    borderColor: 'green',
+                    pointBackgroundColor: function(ctx) {
+                        const value = ctx.raw;
+                        if (value > 100) return 'green';
+                        if (value < 100) return 'red';
+                        return 'gray';
+                    },
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: function(ctx) {
+                        const value = ctx.raw;
+                        if (value > 100) return 'green';
+                        if (value < 100) return 'red';
+                        return 'gray';
+                    }
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        min: 80,
+                        max: 110,
+                        ticks: {
+                            stepSize: 5,
+                            callback: value => value + '%'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}
